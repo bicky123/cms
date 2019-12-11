@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>iSchoolAdmin - Login</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/fontawesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    
+</head>
+
+<body>
+    <div class="login-page-main">
+        <div class="login-main">
+            <div class="login-logo">
+                <a href="/" target="_blank">
+                    <img src="/images/logo.png" class="img-fluid" alt="" />
+                </a>
+            </div>
+            <div class="login-block-area">
+                <div class="login-form">
+                    <h2>Welcome Back</h2>
+                    <p>To keep Connected with us please login with your personal information by Username &amp; Password </p>
+                    <div class="login-form">
+                        <form action="/app/login" method="post" enctype="multipart/form-data" name="LoginForm" id="LoginForm" autocomplete="off">
+                            
+                            <div class="alert alert-danger login_error_box d-none">
+                                <strong>Error:</strong> <span class="login_error_text"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Username*</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend"> <span class="input-group-text"><i class="far fa-user"></i></span> </div>
+                                    <input class="form-control" type="text" name="UserName" id="UserName" placeholder="Username" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Passowrd*</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend"> <span class="input-group-text"><i class="far fa-key"></i></span> </div>
+                                    <input class="form-control" type="password" name="Password" id="Password" placeholder="Password" />
+                                </div>
+                            </div>
+                            <div class="form-group"> <a class="frgt-pwd" href="#">Forgot Your Password? </a> </div>
+                            <div class="form-group">
+                                <button id="login_sub_button" type="submit" class="btn btn-blue">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>       
+
+    </div>
+    <div class="overflow-login">
+        <div class="login-img">
+            <div class="register-login-txt">
+                <h3>
+                    School Management Software <br/>
+                    Manage your school on the go...
+                </h3>
+            </div>
+        </div>
+    </div>    
+
+    
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+
+            
+            $("#LoginForm").validate({
+                rules: {
+                    UserName: {
+                        required: true
+                    },
+                    Password: {
+                        required: true,
+                        minlength: 3
+                    }
+                }, messages: {
+                    uname: {
+                        required: "Please enter username"
+                    },
+                    Password: {
+                        required: "Please enter password",
+                        minlength: "Minimum 3 characters",
+                        maxlength: "Maximim 50 characters"
+                    }
+                }
+            });
+
+            $(document).on("submit", "#LoginForm", function (e) {
+                e.preventDefault();
+                if ($(this).valid()) {
+                    $.ajax({
+                        type: $(this).attr('method'),
+                        url: $(this).attr('action'),
+                        data: $(this).serialize(),
+                        success: function (data) {
+                            if (data.success) {
+                                window.location = data.returnUrl;
+                            } else {
+                                $('#login_sub_button').removeAttr('disabled');
+                                $('#login_sub_button').text('Login');
+                                $('.login_error_box').removeClass('d-none');
+                                $('.login_error_text').html(data.msg);
+                            }
+                        },
+                        error: function (req, error) {
+                            if (error === 'error') { error = req.statusText; }
+                            var errormsg = "";
+                            var actualError = req.responseText;
+                            if (actualError.toLowerCase().indexOf("the provided anti-forgery token was meant for user") != -1) {
+                                window.location.reload();
+                            } else {
+                                errormsg = 'There was a communication error: ' + error;
+                                $('.login_error_box').removeClass('d-none');
+                                $('.login_error_text').html(errormsg);
+                                $('#login_sub_button').removeAttr('disabled');
+                                $('#login_sub_button').text('Login');
+                            }
+                        },
+                        beforeSend: function (data) {
+                            $('#login_sub_button').attr('disabled', 'disabled');
+                            $('#login_sub_button').text('Please wait...');
+                            //$('.login_error_box').addClass('d-none');
+                        }
+                    });
+                }
+            });
+            
+        });
+
+
+    </script>
+
+    <style>
+
+        input.error {
+             border-bottom: 1px solid #f34949 !important; 
+        }
+
+        .error{
+            color: #f34949;
+            font-weight: normal;
+        }
+
+    </style>
+
+</body>
+
+</html>

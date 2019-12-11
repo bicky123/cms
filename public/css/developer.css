@@ -1,0 +1,84 @@
+/*input.input-validation-error {
+    border: 1px solid #AC004A !important;
+}
+
+textarea.input-validation-error {
+    border: 1px solid #AC004A !important;
+}
+
+input:focus + .field-validation-error {
+    display: block;
+}
+textarea:focus + .field-validation-error {
+    display: block;
+}
+
+input.valid {
+    border: 1px solid #ddd !important;
+}
+textarea.valid {
+    border: 1px solid #ddd !important;
+}
+select.valid {
+    border: 1px solid #ddd !important;
+}*/
+
+
+.input-validation-error {
+    border: 1px solid #AC004A !important;
+}
+
+.field-validation-error {
+    color: #AC004A;
+    display: none;
+    font-size: 16px;
+}
+.field-validation-error {
+    display: block;
+}
+
+label.error{
+  color: #d46868;
+}
+
+input[type='text'].error,
+input[type='password'].error{
+  border-bottom: solid 1px #d46868;
+}
+
+.valid {
+    border: 1px solid #ddd !important;
+}
+
+.validation-summary-errors > ul {
+    color: #AC004A;
+    font-weight: bold;
+    list-style: none outside none;
+    text-align: center;
+    font-weight: normal;
+    font-size: 22px;
+}
+
+.sucessmsg
+{
+     background: none repeat scroll 0 0 #57D740;
+     border-radius: 5px;
+     color: #FFFFFF;
+     opacity: 1;
+     min-height: 30px;
+     margin-bottom: 5px;
+     text-align: center;
+     width: 50%;
+}
+
+.errormsg
+{
+     background: none repeat scroll 0 0 #AC004A;
+     border-radius: 5px;
+     color: #FFFFFF;
+     opacity: 1;
+     min-height: 30px;
+     margin-bottom: 5px;
+     text-align: center;
+     width: 50%;
+}

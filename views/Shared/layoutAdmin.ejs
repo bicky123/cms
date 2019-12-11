@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+
+        <title><%= title %></title>
+
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.offcanvas.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/themify-icons.css">
+        <link rel="stylesheet" type="text/css" href="/css/adminstyle.css">
+        <link rel="stylesheet" type="text/css" href="/css/developer.css">
+        <link type="text/css" href="/css/dev_style.css" rel="stylesheet" />
+
+        <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.offcanvas.min.js"></script>
+
+        <script>
+            function toggleChevron(e) {
+                $(e.target)
+                    .prev('.panel-heading')
+                    .find("span.indicator")
+                    .toggleClass('fa-angle-left fa-angle-down');
+            }
+            $('#accordion').on('hidden.bs.collapse', toggleChevron);
+            $('#accordion').on('shown.bs.collapse', toggleChevron);
+    
+        </script>
+
+
+    </head>
+    <body>
+        <%- partial('../Partials/adminHeader') %>
+
+        <section>
+            <div class="container-fluid">
+                <div class="row">
+    
+                    <div class="col-md-3 col-sm-3 col-lg-2 npad">
+                        <%- partial('../Partials/adminLeftMenu') %>
+                       
+                    </div>
+    
+                    <div class="col-sm-9 col-md-9 col-lg-10">
+                        <%- body %>
+                    </div>
+    
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
